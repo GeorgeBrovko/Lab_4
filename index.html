@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторная работа №4 - Циклы</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Лабораторная работа №4</h1>
+        <h2>Циклы</h2>
+    </header>
+    <main>
+        <section>
+            <h2>Задание к работе</h2>
+            <p><strong>Цели и задачи работы:</strong> Изучение циклических алгоритмов, операторов цикла, программирование циклического вычислительного процесса.</p>
+            <p><strong>Задание к работе:</strong> Реализовать  циклический вычислительный  процесс.  Самостоятельно решить задачи в соответствии с индивидуальным вариантом.</p>
+            <p><strong>Требования к отчету:</strong> Отчет должен содержать титульный лист, задание, блок-схему алгоритма решения задачи, текст программы с комментариями, тесты.</p>
+        </section>
+        <section>
+            <h2>Задание 1</h2>
+            <p>Даны десять вещественных чисел. Найти произведение всех четных чисел.</p>
+            <textarea class="code" readonly>
+function task1() {
+    const input = document.getElementById('numbers1').value.trim();
+    const numbers = input.split(' ').map(Number);
+
+    if (numbers.length !== 10 || numbers.some(isNaN)) {
+        document.getElementById('output1').textContent = "Введите ровно 10 чисел через пробел.";
+        return;
+    }
+
+    const product = numbers.reduce((acc, num) => (num % 2 === 0 ? acc * num : acc), 1);
+    const result = product !== 1 ? `Произведение четных чисел: ${product}` : "Четных чисел нет.";
+
+    document.getElementById('output1').textContent = result;
+}
+            </textarea>
+            <textarea id="numbers1" placeholder="Введите значение A"></textarea>
+            <button onclick="task1()">Выполнить код</button>
+            <p id="output1"></p>
+        </section>
+        <section>
+            <h2>Задание 2</h2>
+            <p>Вывести на экран ряд натуральных чисел от минимума до максимума с шагом. Например, если минимум 10, максимум 35, шаг 5, то вывод должен быть таким: 10 15 20 25 30 35. Минимум, максимум и шаг указываются пользователем (считываются с клавиатуры).</p>
+            <textarea class="code" readonly>
+function task2() {
+    const min = parseInt(document.getElementById('min2').value);
+    const max = parseInt(document.getElementById('max2').value);
+    const step = parseInt(document.getElementById('step2').value);
+
+    if (isNaN(min) || isNaN(max) || isNaN(step) || step &lt;= 0) {
+        document.getElementById('output2').textContent = "Введите корректные числа для минимума, максимума и положительного шага.";
+        return;
+    }
+
+    if (min > max) {
+        document.getElementById('output2').textContent = "Минимум должен быть меньше или равен максимуму.";
+        return;
+    }
+
+    const numbers = [];
+    for (let i = min; i &lt;= max; i += step) {
+        numbers.push(i);
+    }
+
+    document.getElementById('output2').textContent = `Ряд чисел: ${numbers.join(' ')}`;
+}
+            </textarea>
+            <input type="number" id="min2" placeholder="Минимум">
+            <input type="number" id="max2" placeholder="Максимум">
+            <input type="number" id="step2" placeholder="Шаг">
+            <button onclick="task2()">Выполнить код</button>
+            <p id="output2"></p>
+        </section>
+    </main>
+    <footer>
+        <p>2024. Лабораторная работа №4. Бровко Георгий Александрович.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
