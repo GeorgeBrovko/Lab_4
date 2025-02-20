@@ -22,19 +22,33 @@
             <h2>Задание 1</h2>
             <p>Даны десять вещественных чисел. Найти произведение всех четных чисел.</p>
             <textarea class="code" readonly>
-function task1() {
-    const input = document.getElementById('numbers1').value.trim();
+function calculateProduct() {
+    // Получаем введенные данные и преобразуем их в массив чисел
+    const input = document.getElementById('inputNumbers').value;
     const numbers = input.split(' ').map(Number);
 
-    if (numbers.length !== 10 || numbers.some(isNaN)) {
-        document.getElementById('output1').textContent = "Введите ровно 10 чисел через пробел.";
+    // Проверка на количество чисел
+    if (numbers.length !== 10) {
+        document.getElementById('result').textContent = "Введите ровно 10 чисел!";
         return;
     }
 
-    const product = numbers.reduce((acc, num) => (num % 2 === 0 ? acc * num : acc), 1);
-    const result = product !== 1 ? `Произведение четных чисел: ${product}` : "Четных чисел нет.";
+    let acc = 1; // Инициализация произведения
+    let hasEven = false; // Флаг для проверки наличия четных чисел
 
-    document.getElementById('output1').textContent = result;
+    for (const num of numbers) {
+        if (num % 2 === 0) { // Проверка на четность
+            acc *= num;     // Умножаем четные числа
+            hasEven = true; // Устанавливаем флаг, если есть хотя бы одно четное число
+        }
+    }
+
+    // Выводим результат в зависимости от наличия четных чисел
+    if (hasEven) {
+        document.getElementById('result').textContent = `Произведение четных чисел: ${acc}`;
+    } else {
+        document.getElementById('result').textContent = "Четных чисел нет.";
+    }
 }
             </textarea>
             <textarea id="inputNumbers" placeholder="Введите значение A"></textarea>
