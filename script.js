@@ -1,33 +1,35 @@
 // Задание 1: Найти произведение всех четных чисел
 function calculateProduct() {
-    // Получаем введенные данные и преобразуем их в массив чисел
+
     const input = document.getElementById('inputNumbers').value;
     const numbers = input.split(' ').map(Number);
-
-    // Проверка на количество чисел
+    let product = 1;
+    
     if (numbers.length !== 10) {
         document.getElementById('result').textContent = "Введите ровно 10 чисел!";
         return;
     }
 
-    let acc = 1; // Инициализация произведения
-    let hasEven = false; // Флаг для проверки наличия четных чисел
-
-    for (const num of numbers) {
-        if (num % 2 === 0) { // Проверка на четность
-            acc *= num;     // Умножаем четные числа
-            hasEven = true; // Устанавливаем флаг, если есть хотя бы одно четное число
+    for (let i = 0; i < numbers.length; i++) {
+        if (isNaN(numbers[i])) {
+            document.getElementById('result').textContent = "Пожалуйста, введите только числа!";
+            return;
         }
     }
 
-    // Выводим результат в зависимости от наличия четных чисел
-    if (hasEven) {
-        document.getElementById('result').textContent = `Произведение четных чисел: ${acc}`;
+    for (let i = 0; i < numbers.length; i++) {
+
+        if (numbers[i] % 2 === 0) {
+            product *= numbers[i];
+        }
+    }
+
+    if (product !== 1) {
+        document.getElementById('result').textContent = `Произведение четных чисел: ${product}`;
     } else {
         document.getElementById('result').textContent = "Четных чисел нет.";
     }
 }
-
 
 // Задание 2: Вывести ряд натуральных чисел
 function task2() {
